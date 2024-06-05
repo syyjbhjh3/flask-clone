@@ -1,5 +1,5 @@
 from flask import Flask
-from flask restful import Api
+from flask_restful import Api
 from dotenv import load_dotenv
 
 def create_app():
