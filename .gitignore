@@ -1,0 +1,4 @@
+*.idea
+
+# Flask 가상환경
+backend/venv
