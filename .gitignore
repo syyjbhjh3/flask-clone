@@ -7,6 +7,14 @@ backend/api/__pycache__
 backend/config/__pycache__
 backend/__pycache__
 backend/api/models/__pycache__
+backend/api/resources/__pycache__
+backend/api/schemas/__pycache__
 
 backend/api/__init__.pyc
 backend/app.pyc
+frontend/assets/.DS_Store
+
+backend/migrations
+
+
+
