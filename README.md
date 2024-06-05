@@ -16,3 +16,8 @@ Flask 연습용, Instagram Clone 코딩
       - mashmallow-sqlalchemy
     - dev.txt : common.txt의 패키지를 모두 설치하기 위한 파일
       - pip install dev.txt
+    - Database
+      - flask db init
+      - flask db migrate
+      - flask db upgrade
+    

@@ -2,3 +2,11 @@
 
 # Flask 가상환경
 backend/venv
+
+backend/api/__pycache__
+backend/config/__pycache__
+backend/__pycache__
+backend/api/models/__pycache__
+
+backend/api/__init__.pyc
+backend/app.pyc
