@@ -23,7 +23,3 @@ class PostSchema (ma.SQLAlchemyAutoSchema) :
         load_instance = True
         include_fk = True
         ordered = True
-
-    # You, 1 second ago | 1 author (You)
-    class Meta:
-        model = PostModel

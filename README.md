@@ -17,9 +17,17 @@ Flask 연습용, Instagram Clone 코딩
       - flask-marshmallow
       - mashmallow-sqlalchemy
       - flask_cors
+    
     - dev.txt : common.txt의 패키지를 모두 설치하기 위한 파일
       - pip install dev.txt
+    
     - Database
-      - flask db init
-      - flask db migrate
-      - flask db upgrade
+      - 최초 sqlite 생성 : flask db init
+      - sqlite 적용, 컬럼 수정시에는 해당 명령어들만 입력
+        - flask db migrate  
+        - flask db upgrade
+    
+    - jwt
+      - 당사자 간에 정보를 json 개체로 안전하게 전송하기 위한 간결하고 자체 포함된 방법을 정의하는 개방형 표준
+      - jwt token 확인 사이트 : jwt.io
+
