@@ -18,7 +18,7 @@ from .resources.post import PostList, Post
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"*": {"origins":"*"}})
+    CORS(app, resources={r"*": {"origins": "*"}})
     load_dotenv(".env", verbose=True)
     app.config.from_object("config.dev")
     app.config.from_envvar("APPLICATION_SETTINGS")
