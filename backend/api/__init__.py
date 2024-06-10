@@ -8,12 +8,14 @@ from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from marshmallow import ValidationError
 
+from datetime import timedelta
+
 from .db import db
 from .ma import ma
 from .models import user, post, comment
 
 from .resources.post import PostList, Post
-from .resources.user import UserRegister, UserLogin
+from .resources.user import UserRegister, UserLogin, RefreshToken
 
 def create_app():
     app = Flask(__name__)
@@ -22,6 +24,9 @@ def create_app():
     app.config.from_object("config.dev")
     app.config.from_envvar("APPLICATION_SETTINGS")
     app.config["JSON_AS_ASCII"] = False
+    # Token 유효시간 설정
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=1)
+    app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=30)
     api = Api(app)
     jwt = JWTManager(app)
     migrate = Migrate(app, db)
@@ -75,5 +80,6 @@ def create_app():
     api.add_resource(Post, "/posts/<int:id>")
     api.add_resource(UserRegister, "/register/")
     api.add_resource(UserLogin, "/login/")
+    api.add_resource(RefreshToken, "/refresh/")
 
     return app

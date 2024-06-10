@@ -1,4 +1,4 @@
-from api.models.user import UserModel
+from api.models.user import UserModel, RefreshTokenModel
 from flask_restful import Resource, request
 from api.schemas.user import UserRegisterSchema
 from flask.views import MethodView
@@ -6,6 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
+    jwt_required
     # get_jwt_identity,
     # get_jwt,
 )
@@ -51,6 +52,42 @@ class UserLogin(MethodView):
         if user and check_password_hash(user.password, data["password"]):
             access_token = create_access_token(identity=user.username, fresh=True)
             refresh_token = create_refresh_token(identity=user.username)
+            # user에 맞는 refresh token이 테이블에 존재하면 업데이트, 존재하지 않으면 저장
+            if user.token:
+                token = user.token[0]
+                token.refresh_token_value = refresh_token
+                token.save_to_db()
+            else:
+                new_token = RefreshTokenModel(user_id=user.id, refresh_token_value=refresh_token)
+                new_token.save_to_db()
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
         
         return {"Unauthorized": "이메일과 비밀번호를 확인하세요."}, 401
+    
+class RefreshToken(MethodView):
+    """
+    Refresh Token 을 받아 검증하고,
+    새로운 Refresh Token, Access token 을 발급합니다.
+    Refresh Token 은 일회용이므로, 새로운 Refresh Token 이 발급되면
+    데이터베이스에 그 값을 저장합니다.
+    """
+    @jwt_required(refresh=True)
+    def post(self):
+        """
+        -> refresh token 은 이미 검증된 상태라고 가정 (틀린 토큰, 만료된 토큰 X)
+        -> 해당 유저가 데이터베이스에서 가지고 있는 refresh token 과 요청으로 들어온 refresh token이 다르다면,
+        -> access token 발급은 실패해야 함
+        """
+        identity = get_jwt_identity()
+        token = dict(request.headers)["Authorization"][7:]
+        user = RefreshTokenModel.get_user_by_token(token)
+        if not user:
+            return {"Unauthorized": "Refresh Token은 2회 이상 사용될 수 없습니다."}, 401
+        # access token, refresh token 발급
+        access_token = create_access_token(fresh=True, identity=identity)
+        refresh_token = create_refresh_token(identity=user.username)
+        if user:
+            token = user.token[0]
+            token.refresh_token_value = refresh_token
+            token.save_to_db()
+            return {"access_token": access_token, "refresh_token": refresh_token}, 200

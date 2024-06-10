@@ -101,3 +101,37 @@ class UserModel(db.Model):
     
     def __repr__(self):
         return f'<User Object : {self.username}>'
+    
+class RefreshTokenModel(db.Model):
+    __tablename__ = "RefreshToken"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("User.id", ondelete="CASCADE"), nullable=False)
+    user = db.relationship("UserModel", backref="token")
+    refresh_token_value = db.Column(db.String(512), nullable=False, unique=True)
+    
+    def save_to_db(self):
+        """
+        토큰을 데이터베이스에 저장
+        """
+        db.session.add(self)
+        db.session.commit()
+        
+    def delete_from_db(self):
+        """
+        토큰을 데이터베이스에서 삭제
+        """
+        db.session.delete(self)
+        db.session.commit()
+        
+    @classmethod
+    def get_user_by_token(cls, token):
+        """
+        리프레시 토큰 값으로 user 객체를 얻어옴
+        """
+        try:
+            user_id = cls.query.filter_by(refresh_token_value=token).first().user_id
+        except AttributeError:
+            return None
+        user = UserModel.find_by_id(id=user_id)
+        return user

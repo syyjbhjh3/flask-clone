@@ -1,6 +1,5 @@
 from api.ma import ma, Method
 from api.models.post import PostModel
-from api.models.user import UserModel
 
 # You, 1 second ago | 1 author (You)
 class PostSchema (ma.SQLAlchemyAutoSchema) :
@@ -17,9 +16,10 @@ class PostSchema (ma.SQLAlchemyAutoSchema) :
             "author_name",
         ]
         # 쓰기 전용 필드들을 정의
-        load_only = [
-            "author_id",
-        ]
+        # load_only = [
+        #    "author_id",
+        # ]
+        exclude = ("author_id",)
         load_instance = True
         include_fk = True
         ordered = True
