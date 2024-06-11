@@ -25,6 +25,7 @@ class UserModel(db.Model):
     password = db.Column(db.String(170), nullable=False)
     email = db.Column(db.String(80), nullable=False, unique=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
+    image = db.Column(db.String(255))
 
     followed = db.relationship(                             # 본인이 팔로우한 유저들
         'UserModel',                                        # User 모델 스스로를 참조

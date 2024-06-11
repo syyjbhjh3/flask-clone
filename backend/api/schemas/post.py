@@ -1,8 +1,14 @@
+from dataclasses import fields
 from api.ma import ma, Method
 from api.models.post import PostModel
 
 # You, 1 second ago | 1 author (You)
 class PostSchema (ma.SQLAlchemyAutoSchema) :
+    image = fields.String(required=True)
+    
+    created_at = fields.DateTime(format="%Y-%m=%d,%H:%M:%S")
+    updated_at = fields.DateTime(format="%Y-%m=%d,%H:%M:%S")
+    
     # 게시물 모델에 관한 직렬화 규칙 정의
     author_name = Method("get_author_name")
     

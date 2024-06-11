@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="/assets/css/post_create.css" type="text/css" />
+    <title>게시물 작성하기</title>
+</head>
+
+<body>
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <form id="post-form" target="dummyframe">
+        <!-- 피드 이미지 미리보기 -->
+        <div id="preview-image"></div>
+
+        <!-- 피드 이미지 선택하기 -->
+        <label for="imagefile" class="select-image" id="select-image">
+            피드 이미지 선택하기
+        </label>
+        <input type="file" id="imagefile" name="imagefile" accept="image/*" onchange="getImageResponse(event);" />
+
+        <!-- 이미지 경로를 저장하기 위한 숨겨진 input -->
+        <input type="text" id="image" name="image" hidden="true">
+
+        <!-- 제목, 내용 입력하기 -->
+        <p><input type="text" id="input-title" name="title" placeholder="제목을 입력하세요."></p>
+        <p><textarea id="input-content" name="content" placeholder="내용을 입력하세요."></textarea></p>
+
+        <!-- 제출하기 -->
+        <input type="submit" value="작성하기" onclick="submitPostData();">
+    </form>
+    <script src="/assets/js/post_create.js"></script>
+</body>
+
+</html>
