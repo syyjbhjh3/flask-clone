@@ -10,13 +10,13 @@ backend/api/models/__pycache__
 backend/api/resources/__pycache__
 backend/api/schemas/__pycache__
 backend/tests/__pycache__
+backend/api/utils/__pycache__
 
 backend/api/__init__.pyc
 backend/app.pyc
 frontend/assets/.DS_Store
+frontend/server/node_modules
+frontend/server/package-lock.json
 
 backend/migrations
-
-
-
-
+frontend/node_modules/

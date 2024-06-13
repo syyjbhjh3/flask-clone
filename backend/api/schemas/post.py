@@ -1,6 +1,7 @@
-from dataclasses import fields
 from api.ma import ma, Method
 from api.models.post import PostModel
+from marshmallow import fields
+
 
 # You, 1 second ago | 1 author (You)
 class PostSchema (ma.SQLAlchemyAutoSchema) :
