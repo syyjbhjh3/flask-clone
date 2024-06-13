@@ -19,6 +19,7 @@ from .models import user, post, comment
 from .resources.post import PostList, Post
 from .resources.user import UserRegister, UserLogin, RefreshToken
 from .resources.Image import PostImageUpload, ProfileImageUpload, Image
+from .resources.comment import CommentList, CommentDetail
 
 def create_app():
     app = Flask(__name__)
@@ -95,5 +96,9 @@ def create_app():
     api.add_resource(PostImageUpload, "/upload/post/image/")
     api.add_resource(ProfileImageUpload, "/upload/profile/image/")
     api.add_resource(Image, "/statics/<path:path>")
+    
+    # Comments 관련
+    api.add_resource(CommentList, "/posts/<int:post_id>/comments/")
+    api.add_resource(CommentDetail, "/posts/<int:post_id>/comments/<int:comment_id>/")
 
     return app

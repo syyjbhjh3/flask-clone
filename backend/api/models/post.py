@@ -23,7 +23,7 @@ class PostModel(db.Model):
     updated_at = db.Column(db.DateTime(timezone=True), default=func.now(), onupdate=func.now())
     author_id = db.Column(db.Integer, db.ForeignKey("User.id", ondelete="CASCADE"), nullable=False)
     author = db.relationship("UserModel", backref="post_author")
-    comment_set = db.relationship("CommentModel", backref="post", passive_deletes=True)
+    comment_set = db.relationship("CommentModel", backref="post", passive_deletes=True, lazy="dynamic")
     image = db.Column(db.String(255))
 
     @classmethod
