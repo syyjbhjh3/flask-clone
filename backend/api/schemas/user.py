@@ -23,3 +23,12 @@ class UserRegisterSchema(ma.SQLAlchemyAutoSchema):
     def validate_password(self, data, **kwargs):
         if data["password"] != data["password_confirm"]:
             raise ValidationError("비밀번호가 일치하지 않습니다.", "password_confirm")
+        
+class AuthorSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        model = UserModel
+        exclude = (
+            "password",
+            "create_at",
+            "email",
+        )

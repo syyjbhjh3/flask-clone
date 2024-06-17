@@ -137,6 +137,22 @@ function executeInfiniteScroll() {
   intersectionObserver.observe(document.querySelector(".bottom"));
 }
 
+/**
+ *  프로필 정보를 수정하거나 조회하기 위한 팝업창을 띄웁니다.
+ */
+function showProfile() {
+  var width = 800;
+  var height = 950;
+  var left = window.screen.width / 2 - width / 2;
+  var top = window.screen.height / 4;
+
+  var windowStatus = `width=${width}, height=${height}, left=${left}, top=${top}, resizable=no, toolbars=no, menubar=no`;
+
+  const url = "http://localhost:3000/flastagram/profile";
+
+  window.open(url, "something", windowStatus);
+}
+
 function main() {
   loadPosts(1);
   executeInfiniteScroll();

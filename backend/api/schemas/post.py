@@ -1,5 +1,6 @@
 from api.ma import ma, Method
 from api.models.post import PostModel
+from api.schemas.user import AuthorSchema
 from marshmallow import fields
 
 
@@ -9,6 +10,7 @@ class PostSchema (ma.SQLAlchemyAutoSchema) :
     
     created_at = fields.DateTime(format="%Y-%m=%d,%H:%M:%S")
     updated_at = fields.DateTime(format="%Y-%m=%d,%H:%M:%S")
+    author = fields.Nested(AuthorSchema)
     
     # 게시물 모델에 관한 직렬화 규칙 정의
     author_name = Method("get_author_name")
