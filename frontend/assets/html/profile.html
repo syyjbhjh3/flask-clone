@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/profile.css" type="text/css" />
+    <title>Profile</title>
+</head>
+
+
+
+<body>
+    <nav>
+        <div class="logo-wrapper">
+            <img src="/assets/img/logo.png" class="logo-img" alt="brand image">
+        </div>
+    </nav>
+    <form id="profile-form">
+        <div class="profile-pic">
+            <img src="" style="width: 700px; height:700px;" />
+            <input type="file" id="imagefile" name="imagefile" accept="image/*" />
+        </div>
+        <div class="email">
+            <label for="email">이메일 :</label>
+            <input type="email" value="hello@www.gdsanadevlog.com" id="email-input" name="email" disabled>
+        </div>
+        <div class="username">
+            <label for="username">이름 :</label>
+            <input type="text" value="goddessana" id="username-input" name="username" disabled>
+        </div>
+        <div class="created-at">
+            <span>가입일자 :</span>
+            <span id="created-at">2022-01-01</span>
+        </div>
+        <div class="input">
+            <input type="submit" value="프로필 수정하기">
+        </div>
+
+    </form>
+</body>
+
+</html>
