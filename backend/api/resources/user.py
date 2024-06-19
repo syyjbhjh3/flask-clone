@@ -1,17 +1,18 @@
 from api.models.user import UserModel, RefreshTokenModel
 from flask_restful import Resource, request
-from api.schemas.user import UserRegisterSchema
+from api.schemas.user import UserRegisterSchema, UserSchema
 from flask.views import MethodView
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
-    jwt_required
-    # get_jwt_identity,
+    jwt_required,
+    get_jwt_identity
     # get_jwt,
 )
 
 register_schema = UserRegisterSchema()
+user_schema = UserSchema()
 class UserRegister(Resource):
     """
     회원가입을 처리합니다.
@@ -91,3 +92,44 @@ class RefreshToken(MethodView):
             token.refresh_token_value = refresh_token
             token.save_to_db()
             return {"access_token": access_token, "refresh_token": refresh_token}, 200
+
+class MyPage(Resource):
+    """
+    마이페이지를 처리합니다.
+    내 프로필 페이지는 나만 접근할 수 있어야 합니다.
+    """
+    @classmethod
+    @jwt_required()
+    def get():
+        """
+        나의 마이페이지를 조회합니다.
+        남의 마이페이지를 조회하려고 시도한다면, 권한이 없다는 에러 처리가 되어야 합니다.
+        """ 
+        username = get_jwt_identity()
+        user = UserModel.find_by_username(username=username)
+        if not user:
+            return {"Error": "사용자를 찾을 수 없습니다."}, 404
+        if id == user.id:
+            return user_schema.dump(user), 200
+        return {"Error": "잘못된 접근입니다."}, 403
+    
+    @classmethod
+    @jwt_required()
+    def put():
+        """
+        특정 유저의 마이페이지 정보를 수정합니다.
+        """
+        user_json = request.get_json()
+        validate_result = user_schema.validate(user_json)
+        if validate_result:
+            return validate_result, 400
+        user = UserModel.find_by_username(get_jwt_identity())
+        
+        if not user:
+            return {"Error": "사용자를 찾을 수 없습니다."}, 404
+        request_user = UserModel.find_by_username(get_jwt_identity())
+        if id == request_user.id:
+            user.update_to_db(user_json)
+            return user_schema.dump(user)
+        else:
+            return {"Error": "잘못된 접근입니다."}, 403

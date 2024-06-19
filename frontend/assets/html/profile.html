@@ -17,11 +17,16 @@
             <img src="/assets/img/logo.png" class="logo-img" alt="brand image">
         </div>
     </nav>
-    <form id="profile-form">
+    <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+    <form id="profile-form" target="dummyframe">
+        <div id="preview-image"></div>
         <div class="profile-pic">
-            <img src="" style="width: 700px; height:700px;" />
-            <input type="file" id="imagefile" name="imagefile" accept="image/*" />
+            <input type="file" class="imagefile" name="imagefile" accept="image/*"
+                onchange="getImageResponse(event);" />
+            <!-- 이미지 경로를 저장하기 위한 숨겨진 input -->
+            <input type="text" class="image" id="image" name="image" hidden="true">
         </div>
+
         <div class="email">
             <label for="email">이메일 :</label>
             <input type="email" value="hello@www.gdsanadevlog.com" id="email-input" name="email" disabled>
@@ -35,10 +40,11 @@
             <span id="created-at">2022-01-01</span>
         </div>
         <div class="input">
-            <input type="submit" value="프로필 수정하기">
+            <button onclick="submitProfileData();">프로필 사진 수정하기</button>
         </div>
 
     </form>
+    <script src="/assets/js/profile.js"></script>
 </body>
 
 </html>

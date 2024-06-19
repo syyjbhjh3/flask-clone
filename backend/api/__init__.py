@@ -17,7 +17,7 @@ from .ma import ma
 from .models import user, post, comment
 
 from .resources.post import PostList, Post
-from .resources.user import UserRegister, UserLogin, RefreshToken
+from .resources.user import UserRegister, UserLogin, RefreshToken, MyPage
 from .resources.Image import PostImageUpload, ProfileImageUpload, Image
 from .resources.comment import CommentList, CommentDetail
 
@@ -100,5 +100,8 @@ def create_app():
     # Comments 관련
     api.add_resource(CommentList, "/posts/<int:post_id>/comments/")
     api.add_resource(CommentDetail, "/posts/<int:post_id>/comments/<int:comment_id>/")
+    
+    # MyPage 관련
+    api.add_resource(MyPage, "/mypage/<int:id>/")
 
     return app
