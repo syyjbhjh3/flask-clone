@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/login.css" type="text/css" />
+    <title>Login - Flastagram</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="main-content">
+            <div class="header">
+                <img src="/assets/img/logo.png" class="brand-img" alt="brand image">
+            </div>
+            <form class="login-form">
+                <input type="Email" placeholder="Email" name="email" class="email-input" />
+                <input type="password" placeholder="Password" name="password" class="password-input" />
+                <input type="button" value="Log in" class="btn" onclick="submitLoginData()" />
+            </form>
+        </div>
+        <div class="sub-content">
+            <div class="s-part">
+                Don't have an account? <a href="#">Sign up</a>
+            </div>
+        </div>
+    </div>
+    <script src="/assets/js/login.js"></script>
+</body>
+
+</html>

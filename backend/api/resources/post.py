@@ -10,6 +10,7 @@ post_list_schema = PostSchema(many=True)
 
 class Post(Resource):
     @classmethod
+    @jwt_required()
     def get(cls, id):
         post = PostModel.find_by_id(id)
         if post:
@@ -55,6 +56,7 @@ class Post(Resource):
 
 class PostList(Resource):
     @classmethod
+    @jwt_required()
     def get(cls):
         page = request.args.get("page", type=int, default=1)
         ordered_posts = PostModel.query.order_by(PostModel.id.desc())

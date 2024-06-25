@@ -1,0 +1,95 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+  
+  body {
+    background-color: #eee;
+    background-image: url("https://i.picsum.photos/id/155/1920/1080.jpg?blur=5&hmac=YSIxbkwRYVPjY4sbu8PxWeFS2p-N3lCajlBU1HeU3C0")
+  }
+  
+  #wrapper {
+    width: 500px;
+    height: 50%;
+    overflow: hidden;
+    border: 0px solid #000;
+    margin: 50px auto;
+    padding: 10px;
+  }
+  
+  .main-content {
+    width: 400px;
+    height: 300px;
+    margin: 10px auto;
+    background-color: #fff;
+    border: 2px solid #e6e6e6;
+    padding: 40px 50px;
+    opacity:0.9;
+  }
+  
+  .login-form {
+    margin-top: 75px;
+  }
+  
+  .header {
+    border: 0px solid #000;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+  
+  .header img {
+    width: 300px;
+    margin: auto;
+    position: relative;
+  }
+  
+  .email-input,
+  .password-input {
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    border: 1px solid #dbdbdb;
+    box-sizing: border-box;
+    border-radius: 3px;
+    font-size: 18px;
+  }
+  
+  
+  .btn {
+    width: 100%;
+    background-color: #3897f0;
+    border: 1px solid #3897f0;
+    padding: 5px 12px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 15px;
+  }
+  
+  .sub-content {
+    width: 400px;
+    height: 40%;
+    margin: 10px auto;
+    border: 1px solid #e6e6e6;
+    padding: 20px 50px;
+    background-color: #fff;
+  }
+  
+  .s-part {
+    text-align: center;
+    font-family: 'Overpass Mono', monospace;
+    word-spacing: -3px;
+    letter-spacing: -2px;
+    font-weight: normal;
+  }
+  
+  .s-part a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #3897f0;
+    font-family: 'Overpass Mono', monospace;
+    word-spacing: -3px;
+    letter-spacing: -2px;
+    font-weight: normal;
+  }

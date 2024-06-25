@@ -50,9 +50,18 @@ class UserLogin(MethodView):
         data = request.get_json()
         user = UserModel.find_by_email(data["email"])
         
+        additional_claims = {"user_id": user.id}
+        
         if user and check_password_hash(user.password, data["password"]):
-            access_token = create_access_token(identity=user.username, fresh=True)
-            refresh_token = create_refresh_token(identity=user.username)
+            access_token = create_access_token(
+                identity=user.username, 
+                fresh=True,
+                additional_claims=additional_claims
+            )
+            refresh_token = create_refresh_token(
+                identity=user.username,
+                additional_claims=additional_claims
+            )
             # user에 맞는 refresh token이 테이블에 존재하면 업데이트, 존재하지 않으면 저장
             if user.token:
                 token = user.token[0]
@@ -85,8 +94,17 @@ class RefreshToken(MethodView):
         if not user:
             return {"Unauthorized": "Refresh Token은 2회 이상 사용될 수 없습니다."}, 401
         # access token, refresh token 발급
-        access_token = create_access_token(fresh=True, identity=identity)
-        refresh_token = create_refresh_token(identity=user.username)
+        additional_claims = {"user_id": user.id}
+        
+        access_token = create_access_token(
+            fresh=True, 
+            identity=identity,
+            additional_claims=additional_claims
+        )
+        refresh_token = create_refresh_token(
+            identity=user.username,
+            additional_claims=additional_claims
+        )
         if user:
             token = user.token[0]
             token.refresh_token_value = refresh_token

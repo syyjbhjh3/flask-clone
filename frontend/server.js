@@ -22,3 +22,7 @@ app.get("/flastagram/post-create", function (req, res) {
 app.get("/flastagram/profile", function (req, res) {
   res.sendFile(path.join(__dirname, "assets", "html", "profile.html"));
 });
+
+app.get("/flastagram/login", function (req, res) {
+  res.sendFile(path.join(__dirname, "assets", "html", "login.html"));
+});
