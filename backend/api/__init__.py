@@ -16,8 +16,8 @@ from .db import db
 from .ma import ma
 from .models import user, post, comment
 
-from .resources.post import PostList, Post
-from .resources.user import UserRegister, UserLogin, RefreshToken, MyPage
+from .resources.post import PostList, Post, PostLike
+from .resources.user import UserRegister, UserLogin, RefreshToken, MyPage, Follow
 from .resources.Image import PostImageUpload, ProfileImageUpload, Image
 from .resources.comment import CommentList, CommentDetail
 
@@ -86,6 +86,7 @@ def create_app():
     # 게시글 관련
     api.add_resource(PostList, "/posts/")
     api.add_resource(Post, "/posts/<int:id>")
+    api.add_resource(PostLike, "/posts/<int:id>/likes/")
     
     # 회원정보 관련
     api.add_resource(UserRegister, "/register/")
@@ -103,5 +104,8 @@ def create_app():
     
     # MyPage 관련
     api.add_resource(MyPage, "/mypage/<int:id>/")
+    
+    # Follow
+    api.add_resource(Follow, "/users/<int:id>/followers/")
 
     return app

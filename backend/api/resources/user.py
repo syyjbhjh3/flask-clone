@@ -7,8 +7,8 @@ from flask_jwt_extended import (
     create_access_token,
     create_refresh_token,
     jwt_required,
-    get_jwt_identity
-    # get_jwt,
+    get_jwt_identity,
+    get_jwt
 )
 
 register_schema = UserRegisterSchema()
@@ -151,3 +151,32 @@ class MyPage(Resource):
             return user_schema.dump(user)
         else:
             return {"Error": "잘못된 접근입니다."}, 403
+        
+class Follow(Resource):
+    """
+    특정한 사용자를 팔로우/언팔로우합니다.
+    """
+
+    @classmethod
+    @jwt_required()
+    def put(cls, id):
+        request_user = UserModel.find_by_username(get_jwt_identity())
+        user_to_follow = UserModel.find_by_id(id)
+        if not request_user:
+            return {"error": "사용자를 찾을 수 없습니다."}, 400
+        if id == get_jwt().get("user_id"):
+            return {"error": "스스로를 팔로우할 수 없습니다."}, 400
+        request_user.follow(user_to_follow)
+        return "", 204
+
+    @classmethod
+    @jwt_required()
+    def delete(cls, id):
+        request_user = UserModel.find_by_username(get_jwt_identity())
+        user_to_unfollow = UserModel.find_by_id(id)
+        if not request_user:
+            return {"error": "사용자를 찾을 수 없습니다."}, 400
+        if id == get_jwt().get("user_id"):
+            return {"error": "스스로를 팔로우할 수 없습니다."}, 400
+        request_user.unfollow(user_to_unfollow)
+        return "", 204

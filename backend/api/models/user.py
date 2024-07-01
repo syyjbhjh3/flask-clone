@@ -42,6 +42,7 @@ class UserModel(db.Model):
         """
         if not self.is_following(user):
             self.followed.append(user)
+            db.session.commit()
             return self
 
     def unfollow(self, user):
@@ -50,6 +51,7 @@ class UserModel(db.Model):
         """
         if self.is_following(user):
             self.followed.remove(user)
+            db.session.commit()
             return self
 
     def is_following(self, user):
