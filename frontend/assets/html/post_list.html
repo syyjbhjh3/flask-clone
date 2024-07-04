@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/assets/css/post_list.css" type="text/css" />
+    <link href=”https://use.fontawesome.com/releases/v6.2.1/css/all.css” rel=”stylesheet” />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <title>Flastagram</title>
 </head>
 
@@ -15,15 +17,16 @@
             <img src="/assets/img/logo.png" class="brand-img" alt="brand image">
             <input type="text" class="search-box" placeholder="search">
             <div class="nav-items">
-                <img src="/assets/img/home.PNG" class="icon" alt="">
-                <img src="/assets/img/messenger.PNG" class="icon" alt="">
-                <img src="/assets/img/add.PNG" class="icon" alt="">
-                <img src="/assets/img/explore.PNG" class="icon" alt="">
-                <img src="/assets/img/like.PNG" class="icon" alt="">
-                <a href="javascript:showProfile()">
-                    <img src="" class="icon user-profile" alt="">
+                <i class="fa-solid fa-house icon"></i>
+                <i class="fa-solid fa-paper-plane icon"></i>
+                <a href="javascript:showPostCreateForm()" class="icon">
+                    <i class="fa-regular fa-square-plus"></i>
                 </a>
-                </div>
+                <i class="fa-regular fa-compass icon"></i>
+                <i class="fa-regular fa-heart icon"></i>
+                <a href="javascript:showProfile()">
+                    <img src="" class="user-profile icon" alt="">
+                </a>
             </div>
         </div>
     </nav>
@@ -119,12 +122,13 @@
                     <img src="" class="post-image" alt="">
                     <div class="post-content">
                         <div class="reaction-wrapper">
-                            <img src="/assets/img/like.PNG" class="icon" alt="">
-                            <img src="/assets/img/comment.PNG" class="icon" alt="">
-                            <img src="/assets/img/send.PNG" class="icon" alt="">
-                            <img src="/assets/img/save.PNG" class="save icon" alt="">
+                            <a class="heart icon" onclick="toggleLikeButton(this);" id="like-button"><i
+                                    class=""></i></a>
+                            <a class="comment icon"><i class="fa-regular fa-comment"></i></a>
+                            <a class="send icon"><i class="fa-solid fa-paper-plane"></i></a>
+                            <a class="save icon"><i class="fa-regular fa-bookmark"></i></a>
                         </div>
-                        <p class="likes">1,999,231 likes</p>
+                        <p class="likes"></p>
                         <p class="description"></p>
                         <!-- <span class="author"></span>- -->
                         <span class="title"></span>
@@ -207,7 +211,11 @@
             </div>
         </div>
     </section>
-    <script src="/assets/js/post_list.js"></script>
+    <script src="/assets/js/utils/decode_jwt.js"></script>
+    <script src="/assets/js/utils/variables.js"></script>
+    <script src="/assets/js/utils/get_new_jwt.js"></script>
+    <script src="/assets/js/auth/handler.js"></script>
+    <script src="/assets/js/post/post_list.js"></script>
 </body>
 
 </html>

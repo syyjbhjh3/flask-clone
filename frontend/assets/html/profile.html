@@ -29,22 +29,25 @@
 
         <div class="email">
             <label for="email">이메일 :</label>
-            <input type="email" value="hello@www.gdsanadevlog.com" id="email-input" name="email" disabled>
+            <input type="email" value="" id="email-input" name="email" disabled>
         </div>
         <div class="username">
             <label for="username">이름 :</label>
-            <input type="text" value="goddessana" id="username-input" name="username" disabled>
+            <input type="text" value="" id="username-input" name="username" disabled>
         </div>
         <div class="created-at">
             <span>가입일자 :</span>
-            <span id="created-at">2022-01-01</span>
+            <span id="created-at"></span>
         </div>
         <div class="input">
             <button onclick="submitProfileData();">프로필 사진 수정하기</button>
         </div>
 
     </form>
-    <script src="/assets/js/profile.js"></script>
+    <script src="/assets/js/utils/decode_jwt.js"></script>
+    <script src="/assets/js/utils/variables.js"></script>
+    <script src="/assets/js/auth/handler.js"></script>
+    <script src="/assets/js/post/profile.js"></script>
 </body>
 
 </html>
